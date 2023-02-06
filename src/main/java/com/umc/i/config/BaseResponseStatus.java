@@ -25,6 +25,7 @@ public enum BaseResponseStatus {
 
     POST_AUTH_INVALID_TYPE(false, 2016, "인증 타입을 확인해주세요"),
     POST_AUTH_SEND_FAIL(false, 2017, "인증번호 발송 실패"),
+
     POST_MEMBER_JOIN_NICKLEN(false,2030,"닉네임 길이 제한"),
     POST_MEMBER_ISREGEX_NICK(false,2031,"닉네임 특수문자 포함"),
     POST_MEMBER_JOIN_INTROLEN(false,2032,"한줄소개 길이 제한"),

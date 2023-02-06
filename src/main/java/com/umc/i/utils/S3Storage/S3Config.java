@@ -1,13 +1,34 @@
 package com.umc.i.utils.S3Storage;
 
-import com.amazonaws.auth.AWSStaticCredentialsProvider;
-import com.amazonaws.auth.BasicAWSCredentials;
-import com.amazonaws.services.s3.AmazonS3;
-import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+
+@Configuration
+public class S3Config {
+    // @Value("${cloud.aws.credentials.access-key}")
+    // private String accessKey;
+
+    // @Value("${cloud.aws.credentials.secret-key:QYlTKs+jeWPOcu2igPEl+4u0xaQ6J07q6yktp3uP}")
+    // private String secretKey;
+
+    // @Value("${cloud.aws.region.static}")
+    // private String region;
+
+    // @Autowired
+    // private Environment env;
+
+    private String accessKey = "AKIA44FRIU24BINQZONF";
+    private String secretKey= "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";
+    private String region = "ap-northeast-2";
+
 
 @Configuration
 public class S3Config {
@@ -32,7 +53,6 @@ public class S3Config {
     //             .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
     //             .build();
     // }
-
     @Bean
     @Primary
     public BasicAWSCredentials awsCredentialsProvider(){

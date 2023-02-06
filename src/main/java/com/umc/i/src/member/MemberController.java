@@ -121,7 +121,7 @@ public class MemberController {
     @ResponseBody
     @PostMapping("/join/auth")
     // 본인인증
-    public BaseResponse<PostAuthRes> checkType(@RequestBody PostAuthReq postJoinAuthReq) throws MessagingException, UnsupportedEncodingException {
+    public BaseResponse<PostAuthRes> sendAuth(@RequestBody PostAuthReq postJoinAuthReq) throws MessagingException, UnsupportedEncodingException {
         switch(postJoinAuthReq.getType()) {
             case 1: //메일 인증
                 if(postJoinAuthReq.getAuth() == null) return new BaseResponse<>(BaseResponseStatus.POST_MEMBER_EMPTY_EMAIL);
