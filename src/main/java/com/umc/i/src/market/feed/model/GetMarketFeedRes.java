@@ -13,7 +13,7 @@ public class GetMarketFeedRes {
     private int marketIdx;
     private int userIdx; // 게시물 작성자
     private String userNickname;
-    private int category;
+    private String group;
     private String title;
     private String content;
     private int price;
