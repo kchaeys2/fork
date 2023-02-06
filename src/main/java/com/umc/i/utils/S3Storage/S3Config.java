@@ -1,5 +1,6 @@
 package com.umc.i.utils.S3Storage;
 
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +28,31 @@ public class S3Config {
     private String accessKey = "AKIA44FRIU24BINQZONF";
     private String secretKey= "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";
     private String region = "ap-northeast-2";
-   
+
+
+@Configuration
+public class S3Config {
+    @Value("${cloud.aws.credentials.access-key}")
+    private String accessKey;
+
+    @Value("${cloud.aws.credentials.secret-key}")
+    private String secretKey;
+
+    @Value("${cloud.aws.region.static}")
+    private String region;
+
+    // private String accessKey = "AKIA44FRIU24BINQZONF";
+    // private String secretKey = "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";
+    // private String region = "ap-northeast-2";
+
+    // @Bean
+    // public AmazonS3Client amazonS3Client() {
+    //     BasicAWSCredentials awsCreds = new BasicAWSCredentials(accessKey, secretKey);
+    //     return (AmazonS3Client) AmazonS3ClientBuilder.standard()
+    //             .withRegion(region)
+    //             .withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+    //             .build();
+    // }
     @Bean
     @Primary
     public BasicAWSCredentials awsCredentialsProvider(){
