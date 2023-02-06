@@ -1,5 +1,4 @@
 package com.umc.i.src.member.model.get;
-
 import lombok.*;
 
 @Getter

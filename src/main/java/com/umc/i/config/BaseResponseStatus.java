@@ -17,11 +17,11 @@ public enum BaseResponseStatus {
     // [POST] /member/join
     POST_MEMBER_EMPTY_EMAIL(false, 2010, "이메일을 입력해주세요."),
     POST_MEMBER_INVALID_EMAIL(false, 2011, "이메일 형식을 확인해주세요."),
-    POST_MEMBER_EXISTS_EMAIL(false,2012,"중복된 이메일입니다."),
+    POST_MEMBER_EXISTS_EMAIL(false, 2012, "중복된 이메일입니다."),
 
     POST_MEMBER_EMPTY_PHONE(false, 2013, "전화번호를 입력해주세요."),
     POST_MEMBER_INVALID_PHONE(false, 2014, "전화번호 형식을 확인해주세요."),
-    POST_MEMBER_EXISTS_PHONE(false,2015,"중복된 전화번호입니다."),
+    POST_MEMBER_EXISTS_PHONE(false, 2015, "중복된 전화번호입니다."),
 
     POST_AUTH_INVALID_TYPE(false, 2016, "인증 타입을 확인해주세요"),
     POST_AUTH_SEND_FAIL(false, 2017, "인증번호 발송 실패"),
@@ -33,7 +33,11 @@ public enum BaseResponseStatus {
     POST_MEMBER_JOIN(false,2018,"회원가입 실패"),
 
     //[PATCH] /member
+    PATCH_MEMBER_EDIT_INTRO(false,2020,"한줄 소개 크기 초과"),
 
+    PATCH_MEMBER_EDIT_NICK(false,2021,"닉네임 수정 횟수 초과"),
+    PATCH_MEMBER_SPECIAL_NICK(false,2022,"닉네임 특수문자 포함"),
+    POST_NUMBER_AUTH_FAILED(false, 2018, "번호 인증을 실패"),
 
     POST_NUMBER_AUTH_TIME_FAILED(false, 2019, "시간 초과"),
 
@@ -43,10 +47,16 @@ public enum BaseResponseStatus {
 
     POST_MARKET_FEED_FAILED(false, 2022, "나눔 거래 게시물 작성 실패"),
 
-    PATCH_MEMBER_NICKNUM_OVER(false,2040,"닉네임 변경 횟수 초과"),
-    PATCH_MEMBER_NICK_DOUBLE(false,2041,"닉네임 중복"),
     //[GET] /mypage
     GET_WRITE_FEED_FAILED(false,2023,"조회 실패");
+
+    GET_MARKET_FEED_BY_PARAM_FAILED(false, 2100, "나눔 거래 게시물 조회 카테고리 설정 오류"),
+
+    FEED_UNAUTHORIZED(false, 2111, "게시물 수정 및 삭제 권한 없음"),
+
+    PATCH_MEMBER_NICKNUM_OVER(false,2040,"닉네임 변경 횟수 초과"),
+   
+    PATCH_MEMBER_NICK_DOUBLE(false,2041,"닉네임 중복"),;
 
     private final boolean isSuccess;
     private final int code;
@@ -57,4 +67,4 @@ public enum BaseResponseStatus {
         this.code = code;
         this.message = message;
     }
-}
+    }

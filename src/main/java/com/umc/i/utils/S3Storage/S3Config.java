@@ -18,7 +18,7 @@ public class S3Config {
     private String secretKey;
 
     @Value("${cloud.aws.region.static}")
-    private String region; 
+    private String region;
 
     // private String accessKey = "AKIA44FRIU24BINQZONF";
     // private String secretKey = "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";

@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Member {
     private int memIdx;
     private String email;

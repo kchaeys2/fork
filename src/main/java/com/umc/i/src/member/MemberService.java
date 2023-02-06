@@ -228,11 +228,11 @@ public class MemberService {
 
 
     //회원가입
-    public String createMem(PostJoinReq postJoinReq, MultipartFile profile) throws BaseException {
+    public BaseResponseStatus createMem(PostJoinReq postJoinReq, MultipartFile profile) throws BaseException {
         try {
             //중복 닉네임 확인(0,1)
             int checkNick = memberDao.checkNick(postJoinReq.getNick());
-            if(checkNick != 0){return "닉네임 중복";}
+            if(checkNick != 0){return PATCH_MEMBER_NICK_DOUBLE;}
 
             String saveFilePath = null;
             if(!profile.getOriginalFilename().equals("basic.jpg")) {  //기본 프로필이 아니면 + 기본 프로필 사진 이름으로 변경하기
@@ -304,7 +304,6 @@ public class MemberService {
             throw new BaseException(INTERNET_ERROR);
         }
     }
-
     //유저 조회
     public GetMemRes getMem(int memIdx)throws BaseException{
         try {

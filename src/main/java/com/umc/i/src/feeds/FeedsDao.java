@@ -18,5 +18,5 @@ public class FeedsDao {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    //마이 홈
+
 }

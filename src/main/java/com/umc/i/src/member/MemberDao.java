@@ -7,12 +7,14 @@ import java.util.Optional;
 
 import javax.sql.DataSource;
 
+
 import com.umc.i.config.BaseException;
+import com.umc.i.config.BaseResponseStatus;
 import com.umc.i.src.member.model.get.GetMemRes;
+
 import com.umc.i.src.member.model.patch.PatchMemReq;
 import com.umc.i.src.member.model.post.PostAuthNumberReq;
 import com.umc.i.src.member.model.post.PostJoinReq;
-import com.umc.i.utils.ValidationRegex;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -30,7 +32,7 @@ public class MemberDao {
     }
 
     //회원가입
-    public String createMem(PostJoinReq postJoinReq, String profileUrl) {
+    public BaseResponseStatus createMem(PostJoinReq postJoinReq, String profileUrl) {
         String createUserQuery = "insert into Member (mem_email, mem_password,mem_phone, mem_nickname,mem_profile_content,mem_profile_url,mem_birth,mem_address,mem_address_code,mem_address_detail) VALUES (?,?,?,?,?,?,?,?,?,?)";
         Object[] createUserParams = new Object[]{postJoinReq.getEmail(), postJoinReq.getPw(),postJoinReq.getPhone(), postJoinReq.getNick(),postJoinReq.getIntro(),profileUrl,
                 postJoinReq.getBirth(),postJoinReq.getAddres(),postJoinReq.getAddresCode(),postJoinReq.getAddresPlus()};
@@ -44,7 +46,7 @@ public class MemberDao {
         this.jdbcTemplate.update(uploadNickQuery,uploadNickParams);
 
         //성공 시 0
-        return "성공";
+        return BaseResponseStatus.SUCCESS;
     }
 
     // 닉네임 확인

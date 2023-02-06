@@ -15,7 +15,6 @@ import com.umc.i.src.member.model.patch.PatchMemReq;
 import com.umc.i.src.member.model.post.PostJoinReq;
 import com.umc.i.src.member.model.post.PostJoinRes;
 import com.umc.i.utils.ValidationRegex;
-import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,34 +35,35 @@ public class MemberController {
     @Autowired
     private final MemberService memberService;
 
-    //회원가입
+    //회원가입-clear
     @ResponseBody
     @PostMapping("/join")
-    public BaseResponse<BaseException> createMem(@RequestPart("request") PostJoinReq postJoinReq,
+    public BaseResponse<BaseResponseStatus> createMem(@RequestPart("request") PostJoinReq postJoinReq,
                                            @RequestPart("profile") MultipartFile profile){
         try {
-            String result = "";
+            BaseResponseStatus baseResponseStatus = null;
 
             if (postJoinReq.getNick().length() > 10){
-                result = "닉네임 길이 초과";
+                baseResponseStatus = BaseResponseStatus.POST_MEMBER_JOIN_NICKLEN;
             } else if(ValidationRegex.isRegexNick(postJoinReq.getNick())) {
-                result = "닉네임 특수문자 포함";
+                baseResponseStatus = BaseResponseStatus.POST_MEMBER_ISREGEX_NICK;
             } else if(postJoinReq.getIntro().length() > 50){
-                result = "한줄소개 길이 제한";
+
+                baseResponseStatus = BaseResponseStatus.POST_MEMBER_JOIN_INTROLEN;
             } else if(postJoinReq.getPw().length() > 15 || postJoinReq.getPw().length() < 7){
-                result = "비밀번호 길이 제한";
+                baseResponseStatus = BaseResponseStatus.POST_MEMBER_JOIN_PWLEN;
             } else if(ValidationRegex.isRegexPw(postJoinReq.getPw())){
-                result = "비밀번호 형식 제한";
+                baseResponseStatus = BaseResponseStatus.POST_MEMBER_ISREGEX_PW;
             }else{
-                result = memberService.createMem(postJoinReq, profile);
+                baseResponseStatus = memberService.createMem(postJoinReq, profile);
             }
 
-            return new BaseResponse<>(BaseResponseStatus.SUCCESS);
+            return new BaseResponse<>(baseResponseStatus);
         } catch (BaseException exception) {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
-    //회원 정보 수정
+    //회원 정보 수정-clear
     @ResponseBody
     @PatchMapping("/{memIdx}")
     public BaseResponse<BaseResponseStatus> editMem(@PathVariable("memIdx") int memIdx, @RequestPart("request") PatchMemReq patchMemReq,
@@ -89,16 +89,16 @@ public class MemberController {
         }
     }
 
-    //비밀 번호 수정
+    //비밀 번호 수정-clear
     @ResponseBody
     @PatchMapping("/{memIdx}/pw")
-    public BaseResponse<BaseResponseStatus> editPw(@PathVariable("memIdx") int memIdx,String pw) {
+    public BaseResponse<BaseResponseStatus> editPw(@PathVariable("memIdx") int memIdx,String pw) throws BaseException {
         try {
             BaseResponseStatus baseResponseStatus = null;
             if(pw.length() > 15 || pw.length() < 7){
                 baseResponseStatus = BaseResponseStatus.POST_MEMBER_JOIN_PWLEN;
             }else if(ValidationRegex.isRegexPw(pw)){
-                baseResponseStatus = BaseResponseStatus.POST_MEMBER_ISREGEX_NICK;
+                baseResponseStatus = BaseResponseStatus.POST_MEMBER_ISREGEX_PW;
             } else{
                 baseResponseStatus = memberService.editPw(memIdx,pw);
             }
@@ -107,8 +107,7 @@ public class MemberController {
             return new BaseResponse<>((e.getStatus()));
         }
     }
-
-    //유저 조회
+    //유저 조회-clear
     @ResponseBody
     @GetMapping("/{memIdx}")
     public BaseResponse<GetMemRes> getMem(@PathVariable("memIdx") int memIdx){
@@ -119,7 +118,6 @@ public class MemberController {
             return new BaseResponse<>((exception.getStatus()));
         }
     }
-
     @ResponseBody
     @PostMapping("/join/auth")
     // 본인인증
