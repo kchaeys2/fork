@@ -32,8 +32,10 @@ public class ValidationRegex {
     }
 
     public static boolean isRegexPw(String target){
-        String regex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$";
-        if(!Pattern.matches(regex,target)){
+        Pattern passPattern1 = Pattern.compile("^(?=.*[a-zA-Z])(?=.*\\d)(?=.*\\W).{8,20}$"); //8자 영문+특문+숫자
+        Matcher passMatcher = passPattern1.matcher(target);
+
+        if (!passMatcher.find()) {
             return true;
         }
         return false;

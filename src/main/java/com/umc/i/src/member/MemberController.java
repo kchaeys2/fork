@@ -48,6 +48,7 @@ public class MemberController {
             } else if(ValidationRegex.isRegexNick(postJoinReq.getNick())) {
                 baseResponseStatus = BaseResponseStatus.POST_MEMBER_ISREGEX_NICK;
             } else if(postJoinReq.getIntro().length() > 50){
+
                 baseResponseStatus = BaseResponseStatus.POST_MEMBER_JOIN_INTROLEN;
             } else if(postJoinReq.getPw().length() > 15 || postJoinReq.getPw().length() < 7){
                 baseResponseStatus = BaseResponseStatus.POST_MEMBER_JOIN_PWLEN;

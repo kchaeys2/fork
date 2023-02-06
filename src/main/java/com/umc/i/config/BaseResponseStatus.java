@@ -47,6 +47,8 @@ public enum BaseResponseStatus {
 
     POST_MARKET_FEED_FAILED(false, 2022, "나눔 거래 게시물 작성 실패"),
 
+    //[GET] /mypage
+    GET_WRITE_FEED_FAILED(false,2023,"조회 실패");
 
     GET_MARKET_FEED_BY_PARAM_FAILED(false, 2100, "나눔 거래 게시물 조회 카테고리 설정 오류"),
 
